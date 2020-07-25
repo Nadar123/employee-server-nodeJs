@@ -9,7 +9,7 @@ connectDB();
 // Middleware
 app.use(express.json({extend: false}));
 
-app.get('/', (req, res) => res.json({ msg: 'employees list API'}))
+app.get('/', (req, res) => res.json({ msg: 'employees-list API'}))
 
 // define routes
 app.use('/api/users', require('./routes/users.routes'));
