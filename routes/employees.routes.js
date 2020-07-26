@@ -20,7 +20,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @access private - get employee by id
-router.get = ('/:id', auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     let employeeId = await Employee.findById(req.params.id);
 
