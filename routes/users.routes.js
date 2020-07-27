@@ -8,9 +8,7 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { findOne } = require('../models/User');
 
-// @route post api/users
-// @desc regsiter a user
-// @access public
+// @access public post/users regsiter a user
 router.post('/', [
   body('name', 'Please add your name').not().isEmpty(),
   body('password', 'Please enter a pwassword with more then 6 characters').isLength({ min: 5 }),
@@ -42,7 +40,7 @@ router.post('/', [
 
     await user.save();
 
-    // object send to token ot get the user id
+    // object send token to get the user id
     const payload = {
       user: {
         id: user.id
@@ -56,8 +54,8 @@ router.post('/', [
       res.json({ token });
     });
 
-  } catch(err) {
-    console.error(err.message);
+  } catch(error) {
+    console.error(error.message);
     res.status(500).send('server error');
   }
   

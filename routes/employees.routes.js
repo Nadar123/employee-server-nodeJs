@@ -14,7 +14,7 @@ router.get('/', auth, async (req, res) => {
     const employees = await Employee.find({user: req.user.id}).sort({date: -1});
     res.json(employees);
   } catch(err) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send('get server error')
   }
 });
@@ -33,12 +33,10 @@ router.get('/:id', auth, async (req, res) => {
     res.json(employeeId);
 
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send('Server error')
   }
 }); 
-
-
 
 // @access private - post employee
 router.post('/', [auth, [
@@ -62,8 +60,8 @@ router.post('/', [auth, [
     const employee = await newEmployee.save();
     res.json(employee);
 
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send('Post server error')
   }
 
@@ -97,7 +95,7 @@ router.put('/:id', auth, async (req, res) => {
     );
     res.json(employee)
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send('Server error')
   }
 });
@@ -117,7 +115,7 @@ router.delete('/:id', auth, async (req, res) => {
     res.json({msg: 'Employee was remove'});
 
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
     res.status(500).send('Server error')
   }
 });

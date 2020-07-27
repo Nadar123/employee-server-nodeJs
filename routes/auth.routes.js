@@ -9,24 +9,19 @@ const { body, validationResult } = require('express-validator');
 
 const User = require('../models/User');
 
-
-// @route get api/auth
-// @desc get request for logging a user
-// @access private
+// @access private - get/auth for logging a user
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
 
-  } catch(err) {
-    console.error(err.message);
+  } catch(error) {
+    console.error(error.message);
     res.status(500).send('Server error');
   }
 });
 
-// @route post api/auth
-// @desc post request for logging a user
-// @access public
+// @access public -post/auth for logging a user
 router.post('/', [
   body('email', 'Please inculde a valid email').isEmail().normalizeEmail(),
   body('password', 'password is required').exists(),
@@ -63,8 +58,8 @@ router.post('/', [
       res.json({ token });
     });
     
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send('server error');
   }
 });
